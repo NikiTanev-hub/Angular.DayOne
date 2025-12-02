@@ -1,0 +1,36 @@
+import {Component} from '@angular/core';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone:true,
+  imports:[FormsModule],
+  template: `
+    <h2> User info </h2>
+    <h3> Name </h3>
+    <input [(ngModel)] = "name" placeholder="Enter your name"> 
+    <h3> Age </h3>
+    <input [(ngModel)] = "age" placeholder="Enter your age"> 
+    <button (click) = "showResult()"> Calculate Year of Birth</button>
+    <p>{{name}}, you were born in {{yearOfBirth}}</p>
+  
+  
+  
+  `,
+})
+export class Playground {
+  name: string = '';
+  age: string = '';
+  yearOfBirth: number | null = null;
+
+  showResult()
+  {
+    const numericAge = Number (this.age);
+    const currentYear = new Date().getFullYear();
+    this.yearOfBirth = currentYear-numericAge;
+  }
+  
+}
+
+bootstrapApplication(Playground);
